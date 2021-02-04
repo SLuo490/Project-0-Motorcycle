@@ -1,8 +1,4 @@
 # Project-0---Motorcycle
----  
-layout: myDefault  
-title: PROJECT 0  
----  
 
 # Project 0 &nbsp; This project will be WHEELIE FUN!
 ![Training Wheel](./wheelie1.png)
