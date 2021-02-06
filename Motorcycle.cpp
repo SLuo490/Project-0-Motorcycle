@@ -24,15 +24,15 @@ Motorcycle::Motorcycle(int kind_of_bike)
   }
 }
 
-std::string Motorcycle::getDirection()
-{
-  return curr_direction_; //?
-}
+// std::string Motorcycle::getDirection()
+// {
+//   return curr_direction_; //?
+// }
 
-std::string Motorcycle::getBikeType()
-{
-  return brand_;
-}
+// std::string Motorcycle::getBikeType()
+// {
+//   return brand_; //?
+// }
 
 float Motorcycle::getSpeed()
 {
@@ -49,9 +49,56 @@ int Motorcycle::getIntensity()
   return curr_acceleration_;
 }
 
+void Motorcycle::turn(float degrees)
+{
+  //update current_direction_
+  if (degrees < 0)
+  {
+    curr_direction_ = degrees + 360;
+  }
+  else
+  {
+    curr_direction_ = degrees;
+  }
+  //print out the directions depending on curr_direction_
+  if (curr_direction_ == 90)
+  {
+    std::cout << "North" << std::endl;
+  }
+  else if ((curr_direction_ > 0) && (curr_direction_ < 90))
+  {
+    std::cout << "Northeast" << std::endl;
+  }
+  else if (curr_direction_ == 0)
+  {
+    std::cout << "East" << std::endl;
+  }
+  else if (curr_direction_ > 270)
+  {
+    std::cout << "Southeast" << std::endl;
+  }
+  else if (curr_direction_ == 270)
+  {
+    std::cout << "South" << std::endl;
+  }
+  else if ((curr_direction_ > 180) && (curr_direction_ < 270))
+  {
+    std::cout << "Southwest" << std::endl;
+  }
+  else if (curr_direction_ == 180)
+  {
+    std::cout << "West" << std::endl;
+  }
+  else
+  {
+    std::cout << "Northwest" << std::endl;
+  }
+}
+
 int main()
 {
   Motorcycle test;
+  test.turn(-90); //South
 
   return 0;
 }
