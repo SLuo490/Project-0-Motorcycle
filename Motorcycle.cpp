@@ -16,7 +16,7 @@ Motorcycle::Motorcycle(int kind_of_bike)
 {
   if ((kind_of_bike < 0) && (kind_of_bike > 4))
   {
-    std::cout << "Enter a new number from 0 - 4" << std::endl;
+    std::cout << "Enter a new number between 0 - 4" << std::endl;
   }
   else
   {
@@ -26,12 +26,12 @@ Motorcycle::Motorcycle(int kind_of_bike)
 
 // std::string Motorcycle::getDirection()
 // {
-//   return curr_direction_; //?
+//   return curr_direction_;
 // }
 
 // std::string Motorcycle::getBikeType()
 // {
-//   return brand_; //?
+//   return brand_;
 // }
 
 float Motorcycle::getSpeed()
@@ -60,34 +60,35 @@ void Motorcycle::turn(float degrees)
   {
     curr_direction_ = degrees;
   }
+
   //print out the directions depending on curr_direction_
   if (curr_direction_ == 90)
   {
     std::cout << "North" << std::endl;
   }
-  else if ((curr_direction_ > 0) && (curr_direction_ < 90))
-  {
-    std::cout << "Northeast" << std::endl;
-  }
   else if (curr_direction_ == 0)
   {
     std::cout << "East" << std::endl;
   }
-  else if (curr_direction_ > 270)
+  else if (curr_direction_ == 180)
   {
-    std::cout << "Southeast" << std::endl;
+    std::cout << "West" << std::endl;
   }
   else if (curr_direction_ == 270)
   {
     std::cout << "South" << std::endl;
   }
+  else if ((curr_direction_ > 0) && (curr_direction_ < 90))
+  {
+    std::cout << "Northeast" << std::endl;
+  }
+  else if (curr_direction_ > 270)
+  {
+    std::cout << "Southeast" << std::endl;
+  }
   else if ((curr_direction_ > 180) && (curr_direction_ < 270))
   {
     std::cout << "Southwest" << std::endl;
-  }
-  else if (curr_direction_ == 180)
-  {
-    std::cout << "West" << std::endl;
   }
   else
   {
@@ -95,10 +96,17 @@ void Motorcycle::turn(float degrees)
   }
 }
 
+void Motorcycle::updateSpeed()
+{
+  //USE THE FOLLOWING FORMULA: [ (acceleration) / 8 ] + [ (brand) * 17.64 ]
+
+  curr_speed_ = (curr_acceleration_ / 8) + (brand_ * 17.64);
+}
+
 int main()
 {
   Motorcycle test;
-  test.turn(-90); //South
+  test.turn(91); //northwest
 
   return 0;
 }
