@@ -24,15 +24,82 @@ Motorcycle::Motorcycle(int kind_of_bike)
   }
 }
 
-// std::string Motorcycle::getDirection()
-// {
-//   return curr_direction_;
-// }
+//Direction
+std::string North = "North";
+std::string East = "East";
+std::string West = "West";
+std::string South = "South";
+std::string Northeast = "Northeast";
+std::string Southwest = "Southwest";
+std::string Southeast = "Southeast";
+std::string Northwest = "Northwest";
 
-// std::string Motorcycle::getBikeType()
-// {
-//   return brand_;
-// }
+std::string Motorcycle::getDirection()
+{
+  //print out the directions depending on curr_direction_
+  if (curr_direction_ == 90)
+  {
+    return North;
+  }
+  else if (curr_direction_ == 0)
+  {
+    return East;
+  }
+  else if (curr_direction_ == 180)
+  {
+    return West;
+  }
+  else if (curr_direction_ == 270)
+  {
+    return South;
+  }
+  else if ((curr_direction_ > 0) && (curr_direction_ < 90))
+  {
+    return Northeast;
+  }
+  else if (curr_direction_ > 270)
+  {
+    return Southeast;
+  }
+  else if ((curr_direction_ > 180) && (curr_direction_ < 270))
+  {
+    return Southwest;
+  }
+  else
+  {
+    return Northwest;
+  }
+}
+
+//bike_brands
+std::string YAMAHA = "YAMAHA";
+std::string DUCATI = "DUCATI";
+std::string HARLEY_DAVIDSON = "HARLEY_DAVIDSON";
+std::string KAWASAKI = "KAWASAKI";
+
+std::string Motorcycle::getBikeType()
+{
+  if (brand_ == 0)
+  {
+    return YAMAHA;
+  }
+  else if (brand_ == 1)
+  {
+    return DUCATI;
+  }
+  else if (brand_ == 2)
+  {
+    return HARLEY_DAVIDSON;
+  }
+  else if (brand_ == 3)
+  {
+    return KAWASAKI;
+  }
+  else
+  {
+    return 0;
+  }
+}
 
 float Motorcycle::getSpeed()
 {
@@ -60,40 +127,6 @@ void Motorcycle::turn(float degrees)
   {
     curr_direction_ = degrees;
   }
-
-  //print out the directions depending on curr_direction_
-  if (curr_direction_ == 90)
-  {
-    std::cout << "North" << std::endl;
-  }
-  else if (curr_direction_ == 0)
-  {
-    std::cout << "East" << std::endl;
-  }
-  else if (curr_direction_ == 180)
-  {
-    std::cout << "West" << std::endl;
-  }
-  else if (curr_direction_ == 270)
-  {
-    std::cout << "South" << std::endl;
-  }
-  else if ((curr_direction_ > 0) && (curr_direction_ < 90))
-  {
-    std::cout << "Northeast" << std::endl;
-  }
-  else if (curr_direction_ > 270)
-  {
-    std::cout << "Southeast" << std::endl;
-  }
-  else if ((curr_direction_ > 180) && (curr_direction_ < 270))
-  {
-    std::cout << "Southwest" << std::endl;
-  }
-  else
-  {
-    std::cout << "Northwest" << std::endl;
-  }
 }
 
 void Motorcycle::updateSpeed()
@@ -103,10 +136,21 @@ void Motorcycle::updateSpeed()
   curr_speed_ = (curr_acceleration_ / 8) + (brand_ * 17.64);
 }
 
+// void Motorcycle::set_Direction (int direction) {
+//   curr_direction_ = direction;
+// }
+
+// void
+
 int main()
 {
   Motorcycle test;
-  test.turn(91); //northwest
+  test.turn(0); //northwest
+  //current direction
+  std::cout << "Current Direction: " << test.getDirection() << std::endl;
+
+  //bike type
+  std::cout << "Current Bike Type: " << test.getBikeType() << std::endl;
 
   return 0;
 }
