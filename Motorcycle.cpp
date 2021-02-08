@@ -160,6 +160,26 @@ void Motorcycle::accelerate()
   updateSpeed();
 }
 
+/**
+    if the current acceleration is not NONE decrease it by one level and call updateSpeed()
+*/
+void Motorcycle::brake()
+{
+  if (curr_acceleration_ == bike_details::LOW)
+  {
+    curr_acceleration_ = bike_details::NONE;
+  }
+  else if (curr_acceleration_ == bike_details::MEDIUM)
+  {
+    curr_acceleration_ = bike_details::LOW;
+  }
+  else if (curr_acceleration_ == bike_details::HIGH)
+  {
+    curr_acceleration_ = bike_details::MEDIUM;
+  }
+  updateSpeed();
+}
+
 int main()
 {
   //default constructor
