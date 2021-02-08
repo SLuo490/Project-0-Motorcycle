@@ -140,6 +140,26 @@ void Motorcycle::updateSpeed()
   curr_speed_ = (curr_acceleration_ / 8) + (brand_ * 17.64);
 }
 
+/**
+    if the current acceleration is not HIGH increase it by one level and call updateSpeed()
+*/
+void Motorcycle::accelerate()
+{
+  if (curr_acceleration_ == bike_details::NONE)
+  {
+    curr_acceleration_ = bike_details::LOW;
+  }
+  else if (curr_acceleration_ == bike_details::LOW)
+  {
+    curr_acceleration_ = bike_details::MEDIUM;
+  }
+  else if (curr_acceleration_ == bike_details::MEDIUM)
+  {
+    curr_acceleration_ = bike_details::HIGH;
+  }
+  updateSpeed();
+}
+
 int main()
 {
   //default constructor
