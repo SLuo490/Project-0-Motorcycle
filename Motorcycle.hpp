@@ -85,6 +85,7 @@ public:
            "West" == 180
            90 < "Northwest" < 180
     */
+
     std::string getDirection();
 
     /* Getter: brand_ */
