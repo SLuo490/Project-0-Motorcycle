@@ -105,21 +105,25 @@ std::string Motorcycle::getBikeType()
   }
 }
 
+//get speed
 float Motorcycle::getSpeed()
 {
   return curr_speed_;
 }
 
+//get total distance travled
 float Motorcycle::getDistanceTraveled()
 {
   return distance_traveled_;
 }
 
+//get intensity
 int Motorcycle::getIntensity()
 {
   return curr_acceleration_;
 }
 
+//change direction
 void Motorcycle::turn(float degrees)
 {
   //update current_direction_
@@ -133,6 +137,7 @@ void Motorcycle::turn(float degrees)
   }
 }
 
+//update the speed
 void Motorcycle::updateSpeed()
 {
   //USE THE FOLLOWING FORMULA: [ (acceleration) / 8 ] + [ (brand) * 17.64 ]
@@ -148,16 +153,18 @@ void Motorcycle::accelerate()
   if (curr_acceleration_ == bike_details::NONE)
   {
     curr_acceleration_ = bike_details::LOW;
+    updateSpeed();
   }
   else if (curr_acceleration_ == bike_details::LOW)
   {
     curr_acceleration_ = bike_details::MEDIUM;
+    updateSpeed();
   }
   else if (curr_acceleration_ == bike_details::MEDIUM)
   {
     curr_acceleration_ = bike_details::HIGH;
+    updateSpeed();
   }
-  updateSpeed();
 }
 
 /**
@@ -168,22 +175,32 @@ void Motorcycle::brake()
   if (curr_acceleration_ == bike_details::LOW)
   {
     curr_acceleration_ = bike_details::NONE;
+    updateSpeed();
   }
   else if (curr_acceleration_ == bike_details::MEDIUM)
   {
     curr_acceleration_ = bike_details::LOW;
+    updateSpeed();
   }
   else if (curr_acceleration_ == bike_details::HIGH)
   {
     curr_acceleration_ = bike_details::MEDIUM;
+    updateSpeed();
   }
-  updateSpeed();
+}
+
+//calculate the total distance traveled
+float Motorcycle::ride(float duration)
+{
+  // multiply duration and speed to find distance traveled
+  distance_traveled_ = duration * curr_speed_;
+
+  return distance_traveled_;
 }
 
 int main()
 {
   //default constructor
-  //Not Random Need Fix
   Motorcycle test;
 
   //bike type
@@ -201,10 +218,10 @@ int main()
     return EXIT_FAILURE;
   }
 
-  //East
+  //Test East
   test.turn(0);
 
-  //current direction
+  //Get current direction
   std::cout << "Current Direction: " << test.getDirection() << std::endl;
 
   return 0;
