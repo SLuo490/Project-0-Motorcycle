@@ -1,6 +1,6 @@
 /*
  Name: Shi Tao Luo
- Date: Deb 8, 2021
+ Date: Feb 8, 2021
  Program: Project 0
  */
 #include <iostream>
@@ -19,6 +19,7 @@ Motorcycle::Motorcycle()
 //parameterized constructor
 Motorcycle::Motorcycle(int kind_of_bike)
 {
+  //edge case: kind_of_bike is less than 0 and greater than 3
   if ((kind_of_bike < 0) || (kind_of_bike > 3))
   {
     throw std::runtime_error("Error: Enter a bike type number between 0 and 3");
@@ -33,80 +34,70 @@ Motorcycle::Motorcycle(int kind_of_bike)
   distance_traveled_ = 0;
 }
 
-//Direction
-std::string North = "North";
-std::string East = "East";
-std::string West = "West";
-std::string South = "South";
-std::string Northeast = "Northeast";
-std::string Southwest = "Southwest";
-std::string Southeast = "Southeast";
-std::string Northwest = "Northwest";
-
 std::string Motorcycle::getDirection()
 {
   //print out the directions depending on curr_direction_
   if (curr_direction_ == 90)
   {
-    return North;
+    return "North";
   }
   else if (curr_direction_ == 0)
   {
-    return East;
+    return "East";
   }
   else if (curr_direction_ == 180)
   {
-    return West;
+    return "West";
   }
   else if (curr_direction_ == 270)
   {
-    return South;
+    return "South";
   }
   else if ((curr_direction_ > 0) && (curr_direction_ < 90))
   {
-    return Northeast;
+    return "Northeast";
   }
-  else if (curr_direction_ > 270)
+  else if ((curr_direction_ > 270) && (curr_direction_ < 360))
   {
-    return Southeast;
+    return "Southeast";
   }
   else if ((curr_direction_ > 180) && (curr_direction_ < 270))
   {
-    return Southwest;
+    return "Southwest";
   }
+  else if ((curr_direction_ > 90) && (curr_direction_ < 180))
+  {
+    return "Northwest";
+  }
+  //Return error: out of bound
   else
   {
-    return Northwest;
+    return "Error: Out of Bound";
   }
 }
 
 //bike_brands
-std::string YAMAHA = "YAMAHA";
-std::string DUCATI = "DUCATI";
-std::string HARLEY_DAVIDSON = "HARLEY_DAVIDSON";
-std::string KAWASAKI = "KAWASAKI";
-
 std::string Motorcycle::getBikeType()
 {
-  if (brand_ == 0)
+  if (brand_ == bike_details::bike_brand(0))
   {
-    return YAMAHA;
+    return "YAMAHA";
   }
-  else if (brand_ == 1)
+  else if (brand_ == bike_details::bike_brand(1))
   {
-    return DUCATI;
+    return "DUCATI";
   }
-  else if (brand_ == 2)
+  else if (brand_ == bike_details::bike_brand(2))
   {
-    return HARLEY_DAVIDSON;
+    return "HARLEY_DAVIDSON";
   }
-  else if (brand_ == 3)
+  else if (brand_ == bike_details::bike_brand(3))
   {
-    return KAWASAKI;
+    return "KAWASAKI";
   }
   else
   {
-    return 0;
+    return "Error: No Bike Type";
   }
 }
 
@@ -128,20 +119,6 @@ int Motorcycle::getIntensity()
   return curr_acceleration_;
 }
 
-//change direction
-void Motorcycle::turn(float degrees)
-{
-  //update current_direction_
-  if (degrees < 0)
-  {
-    curr_direction_ = degrees + 360;
-  }
-  else
-  {
-    curr_direction_ = degrees;
-  }
-}
-
 //update the speed
 void Motorcycle::updateSpeed()
 {
@@ -155,6 +132,7 @@ void Motorcycle::updateSpeed()
 */
 void Motorcycle::accelerate()
 {
+  //Increment acceleration
   if (curr_acceleration_ == bike_details::NONE)
   {
     curr_acceleration_ = bike_details::LOW;
@@ -177,6 +155,7 @@ void Motorcycle::accelerate()
 */
 void Motorcycle::brake()
 {
+  //Decrement acceleration
   if (curr_acceleration_ == bike_details::LOW)
   {
     curr_acceleration_ = bike_details::NONE;
@@ -194,11 +173,55 @@ void Motorcycle::brake()
   }
 }
 
+//distance traveled during duration
+int distance = 0;
 //calculate the total distance traveled
 float Motorcycle::ride(float duration)
 {
-  // multiply duration and speed to find distance traveled
-  distance_traveled_ = duration * curr_speed_;
+  //edge case: negative duration
+  if (duration < 0)
+  {
+    duration = 0;
+  }
+  //calculate distance travel during duration
+  distance = (duration * curr_speed_);
+  distance_traveled_ += distance;
 
-  return distance_traveled_;
+  return distance;
+}
+
+//error?
+//change direction
+void Motorcycle::turn(float degrees)
+{
+  //edgecase: degrees greater than 360 degrees, subtract until less than 360
+  while (degrees >= 360)
+  {
+    degrees -= 360;
+  }
+
+  //edgecase: degrees less than -360, add until less than -360
+  while (degrees <= -360)
+  {
+    degrees -= -360;
+  }
+
+  // negative degrees subtract
+  if (degrees < 0)
+  {
+    curr_direction_ += degrees;
+    while (curr_direction_ < 0)
+    {
+      curr_direction_ -= -360;
+    }
+  }
+  else
+  {
+    curr_direction_ += degrees;
+
+    while (curr_direction_ > 360)
+    {
+      curr_direction_ -= 360;
+    }
+  }
 }

@@ -3,6 +3,7 @@
  Date: Deb 8, 2021
  Program: Project 0
  */
+
 #include <iostream>
 #include "Motorcycle.hpp"
 
@@ -26,11 +27,35 @@ int main()
     return EXIT_FAILURE;
   }
 
-  //Test East
   test.turn(0);
-
-  //Get current direction
   std::cout << "Current Direction: " << test.getDirection() << std::endl;
+  test.turn(45);
+  std::cout << "Current Direction: " << test.getDirection() << std::endl;
+  test.turn(45);
+  std::cout << "Current Direction: " << test.getDirection() << std::endl;
+  test.turn(45);
+  std::cout << "Current Direction: " << test.getDirection() << std::endl;
+  test.turn(45);
+  std::cout << "Current Direction: " << test.getDirection() << std::endl;
+  test.turn(45);
+  std::cout << "Current Direction: " << test.getDirection() << std::endl;
+  test.turn(45);
+  std::cout << "Current Direction: " << test.getDirection() << std::endl;
+  test.turn(45);
+  std::cout << "Current Direction: " << test.getDirection() << std::endl;
+  test.turn(45);
+  std::cout << "Current Direction: " << test.getDirection() << std::endl;
+  test.turn(-90);
+  std::cout << "Current Direction: " << test.getDirection() << std::endl;
+
+  // test.ride(0);
+  // std::cout << "Total Distance Traveled: " << test.getDistanceTraveled() << std::endl;
+  // test.ride(9001);
+  // std::cout << "Total Distance Traveled: " << test.getDistanceTraveled() << std::endl;
+  // test.ride(1);
+  // std::cout << "Total Distance Traveled: " << test.getDistanceTraveled() << std::endl;
+
+  // std::cout << "Speed: " << test.getSpeed() << std::endl;
 
   return 0;
 }

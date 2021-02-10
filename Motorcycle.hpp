@@ -46,7 +46,8 @@ public:
     Motorcycle(int kind_of_bike);
 
     /**
-        given curr_speed_, curr_pedal_intensity_, b_type_, and @param float duration,
+        given curr_speed_, curr_pedal_intensity_, b_type_, and 
+        @param float duration,
             calculate the distance traveled during the specified time;
             increment distance_traveled_ by this amount
         @param float duration: time traveled
