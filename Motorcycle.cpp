@@ -72,7 +72,7 @@ std::string Motorcycle::getDirection()
   //Return error: out of bound
   else
   {
-    return "Error: Out of Bound";
+    return "Out of bounds";
   }
 }
 
@@ -190,8 +190,7 @@ float Motorcycle::ride(float duration)
   return distance;
 }
 
-//error?
-//change direction
+//update direction
 void Motorcycle::turn(float degrees)
 {
   //edgecase: degrees greater than 360 degrees, subtract until less than 360
